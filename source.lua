@@ -5,6 +5,7 @@
 --  Added search to dropdown
 --  UPD 5.1 : hotfix
 --  UPD 5.2 : hotfix
+--  UPD 5.3 : hotfix
 -- ============================================
 
 if getgenv().Library then
