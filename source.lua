@@ -4,6 +4,7 @@
 --  UPD 5  : Dropdown good💋
 --  Added search to dropdown
 --  UPD 5.1 : hotfix
+--  UPD 5.2 : hotfix
 -- ============================================
 
 if getgenv().Library then
@@ -3355,7 +3356,8 @@ local Library do
                     Name = "\0",
                     PaddingBottom = UDimNew(0, 4)
                 })                
-            end        Library.Sections.Dropdown = function(self, Data)
+            end        
+
             Data = Data or { }
 
             local TextService = game:GetService("TextService")
@@ -4093,6 +4095,7 @@ local Library do
             end
 
             return Dropdown
+            end
         end
 
         Library.Sections.Label = function(self, Name)
@@ -4499,7 +4502,7 @@ local Library do
             end
         end
     end
-end
+
 
 getgenv().Library = Library
 return Library
