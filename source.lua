@@ -6,6 +6,7 @@
 --  UPD 5.1 : hotfix
 --  UPD 5.2 : hotfix
 --  UPD 5.3 : hotfix
+--  UPD 5.4 : hotfix
 -- ============================================
 
 if getgenv().Library then
@@ -4381,7 +4382,7 @@ Library.Sections.Dropdown = function(self, Data)
             end
         end
     end
-
+end
 
 getgenv().Library = Library
 return Library
