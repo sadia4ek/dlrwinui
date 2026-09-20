@@ -3207,157 +3207,7 @@ local Library do
             return Slider 
         end
 
-        Library.Sections.Dropdown = function(self, Data)
-            Data = Data or { }
-
-            local Dropdown = {
-                Window = self.Window,
-                Page = self.Page,
-                Section = self,
-
-                Name = Data.Name or Data.name or "Dropdown",
-                Flag = Data.Flag or Data.flag or Library:NextFlag(),
-                Items = Data.Items or Data.items or { },
-                Default = Data.Default or Data.default or "",
-                Callback = Data.Callback or Data.callback or function() end,
-                Multi = Data.Multi or Data.multi or false,
-
-                Value = { },
-                Options = { },
-                IsOpen = false
-            }
-
-            local Items = { } do 
-                Items["Dropdown"] = Instances:Create("Frame", {
-                    Parent = Dropdown.Section.Items["Content"].Instance,
-                    Name = "\0",
-                    BackgroundTransparency = 1,
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    Size = UDim2New(1, 0, 0, 25),
-                    BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })
-                
-                Items["Text"] = Instances:Create("TextLabel", {
-                    Parent = Items["Dropdown"].Instance,
-                    Name = "\0",
-                    FontFace = Library.Font,
-                    TextColor3 = FromRGB(255, 255, 255),
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    Text = Dropdown.Name,
-                    AnchorPoint = Vector2New(0, 0.5),
-                    Size = UDim2New(0, 0, 0, 15),
-                    BackgroundTransparency = 1,
-                    Position = UDim2New(0, 0, 0.5, 0),
-                    BorderSizePixel = 0,
-                    AutomaticSize = Enum.AutomaticSize.X,
-                    TextSize = 14,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })
-                
-                Items["RealDropdown"] = Instances:Create("TextButton", {
-                    Parent = Items["Dropdown"].Instance,
-                    Name = "\0",
-                    FontFace = Library.Font,
-                    TextColor3 = FromRGB(0, 0, 0),
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    Text = "",
-                    AutoButtonColor = false,
-                    AnchorPoint = Vector2New(1, 0.5),
-                    Position = UDim2New(1, 0, 0.5, 0),
-                    Size = UDim2New(0, 80, 0, 25),
-                    BorderSizePixel = 0,
-                    TextSize = 14,
-                    BackgroundColor3 = FromRGB(30, 34, 34)
-                })  Items["RealDropdown"]:AddToTheme({BackgroundColor3 = "Element"})
-                
-                Instances:Create("UICorner", {
-                    Parent = Items["RealDropdown"].Instance,
-                    Name = "\0",
-                    CornerRadius = UDimNew(0, 4)
-                })
-                
-                Items["Value"] = Instances:Create("TextLabel", {
-                    Parent = Items["RealDropdown"].Instance,
-                    Name = "\0",
-                    FontFace = Library.Font,
-                    TextColor3 = FromRGB(100, 100, 100),
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    Text = "...",
-                    AnchorPoint = Vector2New(0, 0.5),
-                    Size = UDim2New(1, -6, 0, 15),
-                    BackgroundTransparency = 1,
-                    Position = UDim2New(0, 6, 0.5, 0),
-                    BorderSizePixel = 0,
-                    TextSize = 12,
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    TextTruncate = Enum.TextTruncate.AtEnd,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })
-                
-                Items["Icon"] = Instances:Create("ImageLabel", {
-                    Parent = Items["RealDropdown"].Instance,
-                    Name = "\0",
-                    ImageColor3 = FromRGB(100, 100, 100),
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    AnchorPoint = Vector2New(1, 0.5),
-                    Image = "rbxassetid://135448248851234",
-                    BackgroundTransparency = 1,
-                    Position = UDim2New(1, -5, 0.5, 0),
-                    Size = UDim2New(0, 16, 0, 16),
-                    BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })
-                
-                Items["OptionHolder"] = Instances:Create("Frame", {
-                    Parent = Library.UnusedHolder.Instance,
-                    Name = "\0",
-                    Visible = false,
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    AnchorPoint = Vector2New(0, 0),
-                    Position = UDim2New(1, 0, 0.5, 0),
-                    Size = UDim2New(0, 80, 0, 0),
-                    BorderSizePixel = 0,
-                    AutomaticSize = Enum.AutomaticSize.Y,
-                    BackgroundColor3 = FromRGB(21, 24, 24)
-                })  Items["OptionHolder"]:AddToTheme({BackgroundColor3 = "Inline"})
-                
-                Instances:Create("UIStroke", {
-                    Parent = Items["OptionHolder"].Instance,
-                    Name = "\0",
-                    Color = FromRGB(30, 33, 33),
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-                }):AddToTheme({Color = "Border"})
-                
-                Items["Holder"] = Instances:Create("ScrollingFrame", {
-                    Parent = Items["OptionHolder"].Instance,
-                    Name = "\0",
-                    Active = true,
-                    AutomaticCanvasSize = Enum.AutomaticSize.XY,
-                    ScrollBarThickness = 2,
-                    Size = UDim2New(1, 0, 1, 0),
-                    BorderSizePixel = 0,
-                    BackgroundTransparency = 1,
-                    ScrollingDirection = Enum.ScrollingDirection.Y,
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    BackgroundColor3 = FromRGB(255, 255, 255),
-                    AutomaticSize = Enum.AutomaticSize.Y,
-                    CanvasSize = UDim2New(0, 0, 0, 0)
-                })  Items["Holder"]:AddToTheme({ScrollBarImageColor3 = "Accent"})
-                
-                Instances:Create("UIListLayout", {
-                    Parent = Items["Holder"].Instance,
-                    Name = "\0",
-                    SortOrder = Enum.SortOrder.LayoutOrder
-                })                
-
-                Instances:Create("UIPadding", {
-                    Parent = Items["OptionHolder"].Instance,
-                    Name = "\0",
-                    PaddingBottom = UDimNew(0, 4)
-                })                
-            end        
-
+Library.Sections.Dropdown = function(self, Data)
             Data = Data or { }
 
             local TextService = game:GetService("TextService")
@@ -3370,6 +3220,8 @@ local Library do
             local OptionGap = 2
             local SearchHeight = 24
             local Pad = 6
+            local LabelGap = 10        -- минимальный отступ между названием и кнопкой
+            local MinButtonWidth = 40  -- кнопка не станет уже этого значения
 
             local SearchEnabled = true
             if Data.Search ~= nil then
@@ -3441,6 +3293,7 @@ local Library do
                     Size = UDim2New(0, 110, 0, 25),
                     BorderSizePixel = 0,
                     TextSize = 14,
+                    ZIndex = 2,
                     BackgroundColor3 = FromRGB(30, 34, 34)
                 })  Items["RealDropdown"]:AddToTheme({BackgroundColor3 = "Element"})
 
@@ -3465,6 +3318,7 @@ local Library do
                     TextSize = 12,
                     TextXAlignment = Enum.TextXAlignment.Left,
                     TextTruncate = Enum.TextTruncate.AtEnd,
+                    ZIndex = 3,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })
 
@@ -3479,6 +3333,7 @@ local Library do
                     Position = UDim2New(1, -5, 0.5, 0),
                     Size = UDim2New(0, 16, 0, 16),
                     BorderSizePixel = 0,
+                    ZIndex = 3,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })
 
@@ -3660,7 +3515,9 @@ local Library do
                 Dropdown:SetVisibility(Bool)
             end
 
-            -- Ширина кнопки/списка по самому длинному варианту
+            -- Ширина кнопки: по самому длинному варианту, НО не больше, чем
+            -- свободное место справа от названия (чтобы не перекрывать текст).
+            -- Ширина попапа считается отдельно и от места не зависит.
             function Dropdown:UpdateWidth()
                 local MaxText = 0
 
@@ -3672,9 +3529,21 @@ local Library do
                     end
                 end
 
-                local ButtonWidth = MathClamp(MaxText + 36, 100, 170)
+                local WantedWidth = MathClamp(MaxText + 36, 100, 170)
 
-                Dropdown.PopupWidth = MathClamp(MathMax(ButtonWidth, MaxText + 40), 100, 360)
+                Dropdown.PopupWidth = MathClamp(MathMax(WantedWidth, MaxText + 40), 100, 360)
+
+                local ButtonWidth = WantedWidth
+                local RowWidth = Items["Dropdown"].Instance.AbsoluteSize.X
+                local LabelWidth = Items["Text"].Instance.AbsoluteSize.X
+
+                -- RowWidth == 0 пока элемент ещё не отрисован; тогда берём WantedWidth,
+                -- а как только размер станет известен, сработает сигнал AbsoluteSize ниже.
+                if RowWidth > 0 then
+                    local Available = RowWidth - LabelWidth - LabelGap
+                    ButtonWidth = MathClamp(Available, MinButtonWidth, WantedWidth)
+                end
+
                 Items["RealDropdown"].Instance.Size = UDim2New(0, ButtonWidth, 0, 25)
 
                 if Dropdown.IsOpen then
@@ -4057,11 +3926,21 @@ local Library do
             end)
 
             if Items["Search"] then
-                Items["Search"].Instance:GetPropertyChangedSignal("Text"):Connect(function()
+                Library:Connect(Items["Search"].Instance:GetPropertyChangedSignal("Text"), function()
                     Items["Holder"].Instance.CanvasPosition = Vector2New(0, 0)
                     Dropdown:UpdateLayout()
                 end)
             end
+
+            -- Пересчитываем ширину кнопки, когда меняется ширина строки
+            -- (ресайз окна / первая отрисовка) или ширина названия.
+            Library:Connect(Items["Dropdown"].Instance:GetPropertyChangedSignal("AbsoluteSize"), function()
+                Dropdown:UpdateWidth()
+            end)
+
+            Library:Connect(Items["Text"].Instance:GetPropertyChangedSignal("AbsoluteSize"), function()
+                Dropdown:UpdateWidth()
+            end)
 
             Library:Connect(UserInputService.InputBegan, function(Input)
                 if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
@@ -4095,7 +3974,6 @@ local Library do
             end
 
             return Dropdown
-            end
         end
 
         Library.Sections.Label = function(self, Name)
