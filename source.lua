@@ -7,6 +7,7 @@
 --  UPD 5.2 : hotfix
 --  UPD 5.3 : hotfix
 --  UPD 5.4 : hotfix
+--  UPD 5.5 : Added a custom config folder name
 -- ============================================
 
 if getgenv().Library then
@@ -73,11 +74,11 @@ local Library do
 
         FadeSpeed = 0.2,
 
-        Folders = {
-            Directory = "Crown",
-            Configs = "Crown/Configs",
-            Assets = "Crown/Assets",
-        },
+		Folders = {
+		    Directory = Data.Folder or Data.folder or "faceless",
+		    Configs = (Data.Folder or Data.folder or "faceless") .. "/Configs",
+		    Assets = (Data.Folder or Data.folder or "faceless") .. "/Assets",
+		}
 
         -- Ignore below
         Pages = { },
@@ -1872,6 +1873,7 @@ local Library do
                 Name = Data.Name or Data.name or "Window",
                 SubTitle = Data.SubTitle or Data.subtitle or "he",
                 ExpiresIn = Data.ExpiresIn or Data.expiresin or "23d",
+                Folder = Data.Folder or Data.folder or "faceless",
                 Icon = Data.Icon or Data.icon or "8508980536",
 
                 Pages = { },
