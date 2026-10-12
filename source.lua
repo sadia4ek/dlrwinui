@@ -8,6 +8,7 @@
 --  UPD 5.3 : hotfix
 --  UPD 5.4 : hotfix
 --  UPD 5.5 : Added a custom config folder name
+--  UPD 5.5 : Fixed everything
 -- ============================================
 
 if getgenv().Library then
@@ -78,7 +79,7 @@ local Library do
 		    Directory = Data.Folder or Data.folder or "faceless",
 		    Configs = (Data.Folder or Data.folder or "faceless") .. "/Configs",
 		    Assets = (Data.Folder or Data.folder or "faceless") .. "/Assets",
-		}
+		},
 
         -- Ignore below
         Pages = { },
