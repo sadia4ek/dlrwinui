@@ -11,6 +11,8 @@
 --  UPD 5.5 : Fixed everything
 -- ============================================
 
+local Data = (type(Data) == "table" and Data) or {}
+
 if getgenv().Library then
     getgenv().Library:Unload()
 end
@@ -79,6 +81,7 @@ local Library do
 		    Directory = Data.Folder or Data.folder or "faceless",
 		    Configs = (Data.Folder or Data.folder or "faceless") .. "/Configs",
 		    Assets = (Data.Folder or Data.folder or "faceless") .. "/Assets",
+		    Fonts = (Data.Folder or Data.folder or "faceless") .. "/Fonts",
 		},
 
         -- Ignore below
