@@ -9,6 +9,7 @@
 --  UPD 5.4 : hotfix
 --  UPD 5.5 : Added a custom config folder name
 --  UPD 5.5 : Fixed everything
+--  UPD 5.6 : откат шестого обновления
 -- ============================================
 
 local Data = (type(Data) == "table" and Data) or {}
