@@ -9,8 +9,6 @@
 --  UPD 5.4 : hotfix
 --  UPD 5.5 : Added a custom config folder name
 --  UPD 5.5 : Fixed everything
---  UPDATE 6: Added optons for all elements
---  UPDATE 6.1: fix
 -- ============================================
 
 local Data = (type(Data) == "table" and Data) or {}
@@ -4802,10 +4800,12 @@ do
         end
     end
 
+    -- Also expose a helper to create a standalone options menu when needed.
     Library.CreateOptionsMenu = function(self, element, anchor, title)
         return makeOptionsMenu(element, anchor, title)
     end
 end
-								
+
+
 getgenv().Library = Library
 return Library
